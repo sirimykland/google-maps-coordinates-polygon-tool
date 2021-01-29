@@ -1,31 +1,12 @@
 var myPolygon, fenceMarker, fenceCircle, map;
 
-function polygonCenter(poly) {
-  var lowx,
-      highx,
-      lowy,
-      highy,
-      lats = [],
-      lngs = [],
-      vertices = poly.getPath();
-
-  for(var i=0; i<vertices.length; i++) {
-    lngs.push(vertices.getAt(i).lng());
-    lats.push(vertices.getAt(i).lat());
-  }
-
-  lats.sort();
-  lngs.sort();
-  lowx = lats[0];
-  highx = lats[vertices.length - 1];
-  lowy = lngs[0];
-  highy = lngs[vertices.length - 1];
-  center_x = lowx + ((highx-lowx) / 2);
-  center_y = lowy + ((highy - lowy) / 2);
-
-
-  return new google.maps.LatLng(center_x, center_y);    
-}
+google.maps.Polygon.prototype.getBoundingBox = function() {
+  var bounds = new google.maps.LatLngBounds();
+  this.getPath().forEach(function(element,index) {
+    bounds.extend(element)
+  });
+  return(bounds);
+};
 
 function initialize() {
   // Map Center
@@ -36,7 +17,7 @@ function initialize() {
     center: myLatLng,
     mapTypeId: 'satellite'
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   // Polygon Coordinates
   var triangleCoords = [
     new google.maps.LatLng(63.42623, 10.3786),
@@ -56,7 +37,7 @@ function initialize() {
   });
 
   fenceMarker = new google.maps.Marker({
-    position: polygonCenter(myPolygon),
+    position: myPolygon.getApproximateCenter(),
     map,
     title: "Hello World!",
   });
@@ -81,13 +62,12 @@ function initialize() {
 
 
 function update(){
-  fenceMarker.setPosition(polygonCenter(myPolygon))
+  fenceMarker.setPosition(myPolygon.getApproximateCenter())
   drawRadius();
   updatePolygonCoords();
   printQuery();
 }
 
-//Display Coordinates below map
 function updatePolygonCoords() {
   var len = myPolygon.getPath().getLength();
   var htmlStr = "";
@@ -98,7 +78,7 @@ function updatePolygonCoords() {
 }
 
 function drawRadius(){
-  var radius = document.getElementById('radius').innerHTML;
+  var radius = document.getElementById('radius').value;
   if (radius==""){ 
     radius = 0;
   }
@@ -116,27 +96,31 @@ function drawRadius(){
 
 function printQuery(){
  
-  var name = document.getElementById('name').innerHTML;
-  var radius = document.getElementById('radius').innerHTML;
-    if (radius==""){ 
+  var name = document.getElementById('name').value;
+  var description = document.getElementById('description').value;
+  var radius = document.getElementById('radius').value;
+  if (radius==""){ 
     radius = 0;
   }
   else if (isNaN(radius)){ 
     radius = parseInt(radius);
   }
   var category = document.getElementById('category').value;
-  var coordinates = document.getElementById('coordinates').innerHTML;
-  var description = document.getElementById('description').innerHTML;
+  var coordinates = document.getElementById('coordinates').value;
 
-  var htmlStr = 'mutation InsertGeofenceMutation {\n\t';
-  htmlStr += 'insert_geofences_one(object: {\n';
+ console.log('\nname:',name,'\ndescription:', description,'\nradius:', radius,
+  '\ncategory:',category,'\ncoordinates:', coordinates, );
+  var htmlStr = '';
+  htmlStr += 'mutation InsertGeofenceMutation {\n\t';
+  htmlStr += 'insert_geofences_one(object: {\n\t';
   htmlStr += 'name: "'+name+'", \n\t';
   htmlStr += 'radius: "'+radius +'", \n\t';
-  htmlStr += 'latitude: "'+fenceMarker.getPosition().lat()+'", longitude: "'+fenceMarker.getPosition().lng()+'", \n\t';
+  htmlStr += 'latitude: "'+fenceMarker.getPosition().lat()+'", \n\t';
+  htmlStr+='longitude: "'+fenceMarker.getPosition().lng()+'", \n\t';
   htmlStr += 'variant: POLYGON, \n\t'; 
-  htmlStr += 'coordinates: "'+coordinates+'",\n\t'; 
   htmlStr += 'category: "'+category+'", \n\t';
-  htmlStr += 'description: "'+description+'"\n';
+  htmlStr += 'description: "'+description+'", \n\t';
+   htmlStr += 'coordinates: "'+coordinates+'" \n'; 
   htmlStr += "}) { \n\t id \n}}";
 
   document.getElementById('graphql').innerHTML = htmlStr;

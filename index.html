@@ -16,46 +16,68 @@
 
   <table>
     <tr>
-      <td class="bTop" colspan="5">
+      <td class="top" colspan="5">
       </td>
     </tr>
-        <tr>
-          <td class="bTop" colspan="5">
-<div class="queryparam">
-  <input type="text" id="name" placeholder="Name" onblur="update()"/>
-  <input type="text" id="description" placeholder="Description" onblur="update()"/>
-  <input type="number" id="radius" placeholder="Radius" onblur="update()" />
-  <select id="category" onblur="update()">
-    <option value="EXERCISE" selected>EXERCISE</option>
-    <option value="CULTURE">CULTURE</option>
-    <option value="EDUCATION">EDUCATION</option>
-    <option value="SOCIAL">SOCIAL</option>
-  </select>
-</div>
-          </td>
-        </tr>
     <tr>
-      <td class="bLeft" colspan="1">
-      <button id="clipboard-btn" onclick="copyToClipboard(document.getElementById('coordinates').innerHTML)">Copy to
-        Clipboard</button>
+      <td class="left">
+        <label>Name:</label>
+      </td>
+      <td colspan="4" class="middle">
+        <input type="text" id="name" placeholder="Name" onchange="update()" />
+      </td>
+    </tr>
+    <tr>
+      <td class="left">
+        <label>Description:</label>
+      </td>
+      <td colspan="4" class="middle">
+        <textarea id="description" placeholder="Description" onchange="update()"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td class="left">
+        <label>Radius:</label>
+      </td>
+      <td colspan="4" class="middle">
+        <input type="number" id="radius" placeholder="Radius" onchange="update()" />
+      </td>
+    </tr>
+    <tr>
+      <td class="left">
+        <label>Category:</label>
+      </td>
+      <td colspan="4" class="middle" >
+        <select id="category" onchange="update()">
+          <option value="EXERCISE" selected>EXERCISE</option>
+          <option value="CULTURE">CULTURE</option>
+          <option value="EDUCATION">EDUCATION</option>
+          <option value="SOCIAL">SOCIAL</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="left" colspan="1">
+        <button id="clipboard-btn" onclick="copyToClipboard(document.getElementById('coordinates').innerHTML)">Copy to
+          Clipboard</button>
       </td>
       <td class="middle" colspan="4">
         <textarea id="coordinates"></textarea>
       </td>
     </tr>
     <tr>
-      <td class="bLeft" colspan="1">
-        <button id="generate-btn" onclick="printQuery()">Generate query</button>
+      <td class="left" colspan="1">
+        <button id="generate-btn" onclick="update()"> Generate query</button>
       </td>
       <td class="middle" colspan="4">
         <textarea id="graphql"></textarea>
       </td>
     </tr>
-  </table>   
+  </table>
 
-  <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
+  <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry'></script>
+  <script src="js/maphelper.js"></script>
   <script src="js/index.js"></script>
-
 </body>
 
 </html>
