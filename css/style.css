@@ -1,6 +1,7 @@
 body {
   background: #222;
 }
+table {border: none;}
 
 h3 {
   margin: 4px 0;
@@ -25,19 +26,24 @@ h3 a:hover {
 #info {
   color: #222;
 }
-
+#queryparam{
+  display: block;
+}
+input{
+  display: block;
+}
+textarea {
+  width: 500px;
+}
+#graphql{
+  height: 400px;
+}
 .lngLat {
   color: #fff;
   margin-bottom: 5px;
 }
-.lngLat .one {
-  padding-left: 250px;
-}
-.lngLat .two {
-  padding-left: 34px;
-}
 
-#clipboard-btn {
+button {
   float: left;
   margin-right: 10px;
   padding: 6px 8px;

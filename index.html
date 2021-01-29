@@ -10,12 +10,48 @@
 
 
 <body onload="initialize()">
-  <h3>Drag or re-shape for coordinates to display below</h3>
+  <h3>Create Geofences</h3>
   <h3><a href="http://codepen.io/jhawes/blog/creating-a-real-estate-polygon-tool">See blog post</a></h3>
   <div id="map-canvas"></div>
-  <div class="lngLat"><span class="one">Lat</span><span class="two">,Lng</span></div>
-  <button id="clipboard-btn" onclick="copyToClipboard(document.getElementById('info').innerHTML)">Copy to Clipboard</button>
-  <textarea id="info"></textarea>
+
+  <table>
+    <tr>
+      <td class="bTop" colspan="5">
+      </td>
+    </tr>
+        <tr>
+          <td class="bTop" colspan="5">
+<div class="queryparam">
+  <input type="text" id="name" placeholder="Name" onblur="update()"/>
+  <input type="text" id="description" placeholder="Description" onblur="update()"/>
+  <input type="number" id="radius" placeholder="Radius" onblur="update()" />
+  <select id="category" onblur="update()">
+    <option value="EXERCISE" selected>EXERCISE</option>
+    <option value="CULTURE">CULTURE</option>
+    <option value="EDUCATION">EDUCATION</option>
+    <option value="SOCIAL">SOCIAL</option>
+  </select>
+</div>
+          </td>
+        </tr>
+    <tr>
+      <td class="bLeft" colspan="1">
+      <button id="clipboard-btn" onclick="copyToClipboard(document.getElementById('coordinates').innerHTML)">Copy to
+        Clipboard</button>
+      </td>
+      <td class="middle" colspan="4">
+        <textarea id="coordinates"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td class="bLeft" colspan="1">
+        <button id="generate-btn" onclick="printQuery()">Generate query</button>
+      </td>
+      <td class="middle" colspan="4">
+        <textarea id="graphql"></textarea>
+      </td>
+    </tr>
+  </table>   
 
   <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
   <script src="js/index.js"></script>
