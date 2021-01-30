@@ -1,11 +1,13 @@
 body {
   background: #222;
   font-family: arial, sans-serif;
-
+  font-size: 18px;
 }
-table {border: none;}
+table {
+  border: none;
+}
 
-h3 {
+h1, h3 {
   margin: 4px 0;
   padding: 5px 0;
   font-family: arial, sans-serif;
@@ -27,7 +29,8 @@ h3 a:hover {
   margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 400px;
+  width: 100px;
+  float: right;
 }
 
 #search-input:focus {
@@ -58,7 +61,7 @@ input, select, textarea {
   border-radius: 5px;
   min-width: 300px;
   width: 100%;
-  font-size: 16px;
+  font-size: 18px;
   font-family: arial, sans-serif;
   float: left;
 }
