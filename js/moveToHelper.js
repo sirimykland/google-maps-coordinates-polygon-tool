@@ -1,4 +1,4 @@
-google.maps.Polygon.prototype.moveTo = function(latLng) {
+google.maps.Polygon.prototype.moveTo = function(latLng, map) {
 
 	// our vars
 	var boundsCenter = this.getApproximateCenter(), // center of the polygonbounds
@@ -78,7 +78,6 @@ google.maps.Polygon.prototype.moveTo = function(latLng) {
 
 	// Update the path of the Polygon to the new path
 	this.setPaths(newPaths);
-
 	// Return the polygon itself so we can chain
 	return this;
 

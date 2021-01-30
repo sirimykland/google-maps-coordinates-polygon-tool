@@ -5,7 +5,10 @@ function search() {
   var input = document.getElementById("search-input").value;
   var latlng = validateNewPlantsForm(input);
   console.log("input", input, new google.maps.LatLng(latlng[0], latlng[1]));
-  myPolygon.moveTo(new google.maps.LatLng(latlng[0], latlng[1]));
+  if(latlng){
+    myPolygon.moveTo(new google.maps.LatLng(latlng[0], latlng[1]));
+    map.setCenter(new google.maps.LatLng(latlng[0], latlng[1]));
+  }
 }
 
 google.maps.Polygon.prototype.getBoundingBox = function() {
@@ -21,7 +24,7 @@ function initialize() {
   var myLatLng = new google.maps.LatLng(63.426517, 10.380051);
   // General Options
   var mapOptions = {
-    zoom: 16,
+    zoom: 12,
     center: myLatLng,
     mapTypeId: 'satellite'
   };
@@ -138,7 +141,7 @@ function printQuery(){
   if(variant=="POLYGON"){
     htmlStr += 'coordinates: "'+coordinates+'" \n'; 
   }
-  
+
   htmlStr += "}) { \n\t id \n}}";
 
   document.getElementById('graphql').innerHTML = htmlStr;
