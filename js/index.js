@@ -1,5 +1,13 @@
 var myPolygon, fenceMarker, fenceCircle, map;
 
+function search() {
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById("search-input").value;
+  var latlng = validateNewPlantsForm(input);
+  console.log("input", input, new google.maps.LatLng(latlng[0], latlng[1]));
+  myPolygon.moveTo(new google.maps.LatLng(latlng[0], latlng[1]));
+}
+
 google.maps.Polygon.prototype.getBoundingBox = function() {
   var bounds = new google.maps.LatLngBounds();
   this.getPath().forEach(function(element,index) {
@@ -17,6 +25,7 @@ function initialize() {
     center: myLatLng,
     mapTypeId: 'satellite'
   };
+
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   // Polygon Coordinates
   var triangleCoords = [
@@ -34,6 +43,8 @@ function initialize() {
     strokeWeight: 2,
     fillColor: '#FF0000',
     fillOpacity: 0.35,
+    overlayLayer: 2,
+    zIndex:100,
   });
 
   fenceMarker = new google.maps.Marker({
@@ -41,6 +52,7 @@ function initialize() {
     map,
     title: "Hello World!",
   });
+
   fenceCircle = new google.maps.Circle({
       strokeColor: "#0000FF",
       strokeOpacity: 0.8,
@@ -51,6 +63,7 @@ function initialize() {
       center: myPolygon.center,
       radius: 0,
     });
+
   
   myPolygon.setMap(map);
   google.maps.event.addListener(myPolygon, "dragend", update);
@@ -62,7 +75,7 @@ function initialize() {
 
 
 function update(){
-  fenceMarker.setPosition(myPolygon.getApproximateCenter())
+  fenceMarker.setPosition(myPolygon.getApproximateCenter());
   drawRadius();
   updatePolygonCoords();
   printQuery();
@@ -105,26 +118,43 @@ function printQuery(){
   else if (isNaN(radius)){ 
     radius = parseInt(radius);
   }
-  var category = document.getElementById('category').value;
+  var variant = document.getElementById('variant').value;
+    var category = document.getElementById('category').value;
   var coordinates = document.getElementById('coordinates').value;
 
  console.log('\nname:',name,'\ndescription:', description,'\nradius:', radius,
-  '\ncategory:',category,'\ncoordinates:', coordinates, );
+             '\ncategory:',category,'\ncoordinates:', coordinates, );
   var htmlStr = '';
   htmlStr += 'mutation InsertGeofenceMutation {\n\t';
   htmlStr += 'insert_geofences_one(object: {\n\t';
   htmlStr += 'name: "'+name+'", \n\t';
   htmlStr += 'radius: "'+radius +'", \n\t';
   htmlStr += 'latitude: "'+fenceMarker.getPosition().lat()+'", \n\t';
-  htmlStr+='longitude: "'+fenceMarker.getPosition().lng()+'", \n\t';
-  htmlStr += 'variant: POLYGON, \n\t'; 
+  htmlStr +='longitude: "'+fenceMarker.getPosition().lng()+'", \n\t';
+  htmlStr += 'variant: '+variant+', \n\t'; 
   htmlStr += 'category: "'+category+'", \n\t';
   htmlStr += 'description: "'+description+'", \n\t';
-   htmlStr += 'coordinates: "'+coordinates+'" \n'; 
+
+  if(variant=="POLYGON"){
+    htmlStr += 'coordinates: "'+coordinates+'" \n'; 
+  }
+  
   htmlStr += "}) { \n\t id \n}}";
 
   document.getElementById('graphql').innerHTML = htmlStr;
 }
+
 function copyToClipboard(text) {
   window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+}
+
+function validateNewPlantsForm(latlng){
+  var latlngArray = latlng.split(",");
+  for(var i = 0; i < latlngArray.length; i++) {
+    if(isNaN(latlngArray[i]) || latlngArray[i] < -127 || latlngArray[i] > 75){
+      alert("Lat/Long not vaild.");
+      return;
+    }
+  }
+  return latlngArray;
 }

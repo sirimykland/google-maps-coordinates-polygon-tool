@@ -100,6 +100,7 @@ google.maps.Polygon.prototype.getApproximateCenter = function() {
         break;
       }
     }
+    update();
     return(testPos);
   }
 };

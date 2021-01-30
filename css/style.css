@@ -20,6 +20,20 @@ h3 a:hover {
   color: #55d4ff;
 }
 
+#search-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#search-input:focus {
+  border-color: #4d90fe;
+}
+
 #map-canvas {
   width: auto;
   height: 500px;

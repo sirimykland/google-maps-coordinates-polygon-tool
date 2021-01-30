@@ -5,18 +5,33 @@
   <meta charset="UTF-8">
   <title>Google Maps Polygon Coordinates Tool</title>
   <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 
 <body onload="initialize()">
   <h3>Create Geofences</h3>
   <h3><a href="http://codepen.io/jhawes/blog/creating-a-real-estate-polygon-tool">See blog post</a></h3>
-  <div id="map-canvas"></div>
 
   <table>
     <tr>
       <td class="top" colspan="5">
+        <input id="search-input" type="text" placeholder="Go to Coordiates" onblur="search()" />
+      </td>
+    </tr>
+    <tr>
+      <td class="top" colspan="5">
+        <div id="map-canvas"></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="left">
+        <label>Variant:</label>
+      </td>
+      <td colspan="4" class="middle">
+        <select id="variant" onchange="update()">
+          <option value="POLYGON" selected>POLYGON</option>
+          <option value="CIRCLE">CIRCLE</option>
+        </select>
       </td>
     </tr>
     <tr>
@@ -76,6 +91,7 @@
   </table>
 
   <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry'></script>
+  <script src="js/moveToHelper.js"></script>
   <script src="js/maphelper.js"></script>
   <script src="js/index.js"></script>
 </body>
