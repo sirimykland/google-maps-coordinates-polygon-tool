@@ -87,9 +87,10 @@ function update(){
 function updatePolygonCoords() {
   var len = myPolygon.getPath().getLength();
   var htmlStr = "";
-  for (var i = 0; i < len; i++) {
-    htmlStr += myPolygon.getPath().getAt(i).toUrlValue(5) + ", ";
-  }
+  for (var i = 0; i < len-1; i++) {
+    htmlStr += myPolygon.getPath().getAt(i).toUrlValue(5) + ",";
+  } 
+  htmlStr += myPolygon.getPath().getAt(len-1).toUrlValue(5);
   document.getElementById('coordinates').innerHTML = htmlStr;
 }
 
