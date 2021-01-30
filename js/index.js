@@ -21,10 +21,10 @@ google.maps.Polygon.prototype.getBoundingBox = function() {
 
 function initialize() {
   // Map Center
-  var myLatLng = new google.maps.LatLng(63.426517, 10.380051);
+  var myLatLng = new google.maps.LatLng(63.4277,10.39353);
   // General Options
   var mapOptions = {
-    zoom: 12,
+    zoom: 15,
     center: myLatLng,
     mapTypeId: 'satellite'
   };
@@ -32,9 +32,9 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   // Polygon Coordinates
   var triangleCoords = [
-    new google.maps.LatLng(63.42623, 10.3786),
-    new google.maps.LatLng(63.42788, 10.37973),
-    new google.maps.LatLng(63.42682, 10.38249)
+    new google.maps.LatLng(63.42827,10.39184),
+    new google.maps.LatLng(63.42992,10.39297),
+    new google.maps.LatLng(63.42886,10.39573)
   ];
   // Styling & Controls
   myPolygon = new google.maps.Polygon({

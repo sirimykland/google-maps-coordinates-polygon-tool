@@ -9,17 +9,18 @@
 
 
 <body onload="initialize()">
-  <h3>Create Geofences</h3>
-  <h3><a href="http://codepen.io/jhawes/blog/creating-a-real-estate-polygon-tool">See blog post</a></h3>
   <table>
     <tr>
       <td class="top" colspan="5">
-        <input id="search-input" type="text" placeholder="Go to Coordiates" onblur="search()" />
+        <div id="map-canvas"></div>
       </td>
     </tr>
     <tr>
-      <td class="top" colspan="5">
-        <div id="map-canvas"></div>
+      <td class="left" colspan="4">
+        <h3>Geofencing tool</h3>
+      </td>
+      <td class="middle" colspan="1">
+        <input id="search-input" type="text" placeholder="Go to Coordiates" onblur="search()" />
       </td>
     </tr>
     <tr>
@@ -94,5 +95,5 @@
   <script src="js/maphelper.js"></script>
   <script src="js/index.js"></script>
 </body>
-
+<a href="http://codepen.io/jhawes/blog/creating-a-real-estate-polygon-tool">See blog post</a>
 </html>
