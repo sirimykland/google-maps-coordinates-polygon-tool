@@ -1,5 +1,10 @@
-A Pen created at CodePen.io. You can find this one at http://codepen.io/jhawes/pen/ujdgK.
+A custom tool I built to generate geofences mutation queries for the Mobile game Hover. 
 
- Outputs the coordinates (longitude, latitude) for Google Maps whenever the Polygon is moved or re-shaped. Recently added a 'Copy to Clipboard' button and had data output into a textarea for easier copying & pasting
+The tool enables user(me) to draw a geofence on a map and  translate the coordinate into a GraphQL mutation.
+Geofences can be both polygons or circles, and the user can add name, descriptin and category, see screenshot. 
 
-I originally built this to build map outlines for neighborhoods, villages, districts and counties - specifically for real estate purposes.
+
+The tool can be found here: https://home.samfundet.no/~sirmy/geofencing/
+
+The geofences appear in the Hover app when geofence is inserted in DB. 
+
