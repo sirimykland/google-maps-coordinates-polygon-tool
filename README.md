@@ -5,9 +5,9 @@ Geofences can be both polygons or circles, and the user can add name, descriptin
 
 The tool can be found here: https://home.samfundet.no/~sirmy/geofencing/
 
-![The geofencing tool](/images/geofence-page.png?raw=true)
+![The geofencing tool](images/geofence-page.png?raw=true)
 
 The geofences appear in the Hover app when geofence is inserted in DB. 
 
-![The map view in the app Hover](/images/hover-geofences.jpg?raw=true)
+![The map view in the app Hover](images/hover-geofences.jpg?raw=true)
 
