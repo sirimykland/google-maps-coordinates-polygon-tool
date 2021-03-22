@@ -11,4 +11,5 @@ The geofences appear in the Hover app when geofence is inserted in DB.
 
 ![The map view in the app Hover](images/hover-geofences.png?raw=true)
 
-Want mor information on the Hover project? Check it out [here](https://hover-game.web.app).
+
+Want more information on the Hover project? Check it out [here](https://hover-game.web.app).
