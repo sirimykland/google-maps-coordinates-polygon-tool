@@ -1,4 +1,4 @@
-A custom tool I built to generate geofences mutation queries for the Mobile game Hover. 
+A custom tool I built to generate geofence mutations for the Mobile game Hover. 
 
 The tool enables user(me) to draw a geofence on a map and  translate the coordinate into a GraphQL mutation.
 Geofences can be both polygons or circles, and the user can add name, descriptin and category, see screenshot. 
